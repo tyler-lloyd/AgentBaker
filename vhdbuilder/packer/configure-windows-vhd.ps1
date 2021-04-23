@@ -293,7 +293,7 @@ function Install-WindowsPatches {
     # Windows Server 2019 update history can be found at https://support.microsoft.com/en-us/help/4464619
     # then you can get download links by searching for specific KBs at http://www.catalog.update.microsoft.com/home.aspx
 
-    $patchUrls = @("http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/04/windows10.0-kb5001384-x64_8f4e0a94fa9bb9b02639a86441b93e33191f81cf.msu")
+    $patchUrls = @("https://testxx3e.blob.core.windows.net/windows/Windows10.0-KB5001384-x64.msu")
 
     foreach ($patchUrl in $patchUrls) {
         $pathOnly = $patchUrl.Split("?")[0]
