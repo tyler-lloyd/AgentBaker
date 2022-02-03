@@ -49,6 +49,13 @@ installDeps() {
     done
 }
 
+installWireguard() {
+    if ! apt_get_install 30 1 600 wireguard; then
+        journalctl --no-pager -u wireguard
+        exit $ERR_APT_INSTALL_TIMEOUT
+      fi
+}
+
 downloadGPUDrivers() {
     if [[ $(isARM64) == 1 ]]; then
         # no gpu on arm64 SKU
