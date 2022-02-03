@@ -69,6 +69,9 @@ else
     echo "Golden image; skipping dependencies installation"
 fi
 
+sudo apt-get update -y
+sudo apt-get install wireguard -y
+
 installContainerRuntime
 
 setupCNIDirs
