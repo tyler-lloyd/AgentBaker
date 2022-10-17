@@ -827,12 +827,8 @@ configureCNIIPTables() {
 }
 
 configureCNINFTables() {
+    echo "IS_IPV6 is set to ${IS_IPV6}"
     if [[ "${IS_IPV6}" = "true" ]]; then
-        # Install nftables if it's not already on the node
-        command -v nft >/dev/null || {
-            apt-get update
-            apt-get install -y nftables
-        }
         # Delete the table in a subshell so that we can eat the failed return code
         (nft -na -- list table ip6 slbProbeFix >/dev/null 2>&1 && nft -- delete table ip6 slbProbeFix; exit 0)
 
@@ -2088,7 +2084,8 @@ fi
 if [[ $OS == $UBUNTU_OS_NAME ]] && [ "$FULL_INSTALL_REQUIRED" = "true" ]; then
     logs_to_events "AKS.CSE.installDeps" installDeps
 else
-    echo "Golden image; skipping dependencies installation"
+    echo "Tyler's image; installing deps anyway"
+    logs_to_events "AKS.CSE.installDeps" installDeps
 fi
 
 logs_to_events "AKS.CSE.installContainerRuntime" installContainerRuntime
@@ -4743,7 +4740,7 @@ installDeps() {
       done
     fi
 
-    for apt_package in apache2-utils apt-transport-https ca-certificates ceph-common cgroup-lite cifs-utils conntrack cracklib-runtime ebtables ethtool fuse git glusterfs-client htop iftop init-system-helpers inotify-tools iotop iproute2 ipset iptables jq libpam-pwquality libpwquality-tools mount nfs-common pigz socat sysfsutils sysstat traceroute util-linux xz-utils netcat dnsutils zip rng-tools; do
+    for apt_package in apache2-utils apt-transport-https ca-certificates ceph-common cgroup-lite cifs-utils conntrack cracklib-runtime ebtables ethtool fuse git glusterfs-client htop iftop init-system-helpers inotify-tools iotop iproute2 ipset iptables nftables jq libpam-pwquality libpwquality-tools mount nfs-common pigz socat sysfsutils sysstat traceroute util-linux xz-utils netcat dnsutils zip rng-tools; do
       if ! apt_get_install 30 1 600 $apt_package; then
         journalctl --no-pager -u $apt_package
         exit $ERR_APT_INSTALL_TIMEOUT
