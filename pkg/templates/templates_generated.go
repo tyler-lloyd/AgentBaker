@@ -6477,6 +6477,7 @@ try
     }
 
     # add node-ips
+    Write-Log "debug - check to see if this change shows up"
     if ($global:IsDualStackEnabled) {
         $addrs = @()
         Write-Log "Getting IPs for dualstack cluster"
