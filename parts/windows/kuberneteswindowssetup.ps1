@@ -168,7 +168,7 @@ $global:CsiProxyUrl = "{{GetVariable "windowsCSIProxyURL" }}";
 $global:EnableHostsConfigAgent = [System.Convert]::ToBoolean("{{ EnableHostsConfigAgent }}");
 
 # These scripts are used by cse
-$global:CSEScriptsPackageUrl = "https://tylloydcse.blob.core.windows.net/standalone/";
+$global:CSEScriptsPackageUrl = "{{GetVariable "windowsCSEScriptsPackageURL" }}";
 
 # PauseImage
 $global:WindowsPauseImageURL = "{{GetVariable "windowsPauseImageURL" }}";
