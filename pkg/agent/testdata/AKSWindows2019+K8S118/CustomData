@@ -164,7 +164,7 @@ $global:CsiProxyUrl = "";
 $global:EnableHostsConfigAgent = [System.Convert]::ToBoolean("false");
 
 # These scripts are used by cse
-$global:CSEScriptsPackageUrl = "https://tylloydcse.blob.core.windows.net/standalone/aks-windows-cse-scripts-v1.1.34.zip";
+$global:CSEScriptsPackageUrl = "";
 
 # PauseImage
 $global:WindowsPauseImageURL = "mcr.microsoft.com/oss/kubernetes/pause:1.4.0";
